@@ -28,8 +28,7 @@ def lcg():
             value_1, value_2 = grab()
             return_val = rr(9, value_1, 0, value_2)
     except Exception as e:
-        print("Got recursion exception {}".format(str(e)))
-        sys.exit(0)
+        raise
     return return_val
 
 def rr(modulus, multiplier, increment, seed):
@@ -41,7 +40,7 @@ def rr(modulus, multiplier, increment, seed):
                0 <= seed < modulus
     if relation == False:
         if increment == 0 and seed == 0:
-            ret_val == rr(9, value_1, 0, 1)
+            return_val == rr(9, value_1, 0, 1)
         else:
             lcg()
             
