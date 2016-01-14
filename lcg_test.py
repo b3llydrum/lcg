@@ -16,8 +16,9 @@ class Recursion(Exception):
     pass
 
 def grab():
-    value_1, value_2 = int(str(time.time()-int(time.time()))[-1]), \
-                       int(str(time.time()-int(time.time()))[-2])
+    while not value_1 and not value_2:
+        value_1, value_2 = int(str(time.time()-int(time.time()))[-1]), \
+                           int(str(time.time()-int(time.time()))[-2])
     return value_1, value_2
 
 def lcg():
