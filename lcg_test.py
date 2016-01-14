@@ -22,13 +22,10 @@ def grab():
 
 def lcg():
     value_1, value_2 = grab()
-    try:
-        return_val = False
-        while not return_val:
-            value_1, value_2 = grab()
-            return_val = rr(9, value_1, 0, value_2)
-    except Exception as e:
-        raise
+    return_val = False
+    while not return_val:
+        value_1, value_2 = grab()
+        return_val = rr(9, value_1, 0, value_2)
     return return_val
 
 def rr(modulus, multiplier, increment, seed):
