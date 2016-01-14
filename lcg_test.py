@@ -22,7 +22,7 @@ def grab():
                            int(str(time.time()-int(time.time()))[-2])
     return value_1, value_2
 
-def rr():
+def rr(modulus, increment):
     relation = 0
     while not relation:
         multiplier, seed = grab()
@@ -51,5 +51,8 @@ def generate(modulus, multiplier, increment, seed):
         output.append(current_iteration)
 
     return int(str("".join([str(i) for i in output]))[-2])
+
+return_val = rr(9, 0)
+print(return_val)
 
 sys.exit(0)
