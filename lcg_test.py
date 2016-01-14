@@ -10,7 +10,10 @@
 # splice in the output variable on line 50
 # for more visit https://en.wikipedia.org/wiki/Linear_congruential_generator
 
-import time
+import time, sys
+
+class RecursionError(Exception):
+    pass
 
 def lcg():
     global value_1
@@ -19,7 +22,8 @@ def lcg():
                        int(str(time.time()-int(time.time()))[-2])
     try:
         rr(9, value_1, 0, value_2) # line 21
-    except RecursionError:
+    except Exception:
+        raise RecursionError
         lcg()
 
 def rr(modulus, multiplier, increment, seed):
@@ -59,3 +63,5 @@ def rr(modulus, multiplier, increment, seed):
         print(output)
         return output
 lcg()
+
+sys.exit(0)
