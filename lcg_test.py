@@ -30,7 +30,7 @@ def rr(modulus, increment):
                    0 < multiplier < modulus and \
                    0 <= increment < modulus and \
                    0 <= seed < modulus
-    return generate(9, multiplier, 0, seed)
+    return generate(modulus, multiplier, increment, seed)
         
 def generate(modulus, multiplier, increment, seed):
 
