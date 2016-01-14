@@ -12,6 +12,9 @@
 
 import time, sys
 
+class Recursion(Exception):
+    pass
+
 def grab():
     value_1, value_2 = int(str(time.time()-int(time.time()))[-1]), \
                        int(str(time.time()-int(time.time()))[-2])
@@ -25,7 +28,10 @@ def lcg():
             value_1, value_2 = grab()
             return_val = rr(9, value_1, 0, value_2)
     except Exception:
-        lcg()
+        print("Got recursion exception {}".format(str(e)))
+        sys.exit(0)
+    return return_val
+    print(return_val)
 
 def rr(modulus, multiplier, increment, seed):
     global output
