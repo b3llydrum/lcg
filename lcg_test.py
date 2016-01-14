@@ -3,22 +3,22 @@
 # Xn+1 = (aXn + c) mod m
 # this version is mod 9, generating one random digit using that relation
 # with an increment of 0, making it multiplicative
-# but that can be changed by adjusting the third argument on line 20
+# but that can be changed by adjusting the third argument on line 21
 # the multiplier and seed values are the only variables
 # and are pulled from the current time at execution
 # this lcg only pulls one integer, can be changed by adjusting the
 # splice in the output variable on line 50
 # for more visit https://en.wikipedia.org/wiki/Linear_congruential_generator
 
-import time # line 13
+import time
 
 def lcg():
     global value_1
     global value_2
-    value_1, value_2 = int(str(time.time()-int(time.time()))[2]), \
-                       int(str(time.time()-int(time.time()))[3])
+    value_1, value_2 = int(str(time.time()-int(time.time()))[-1]), \
+                       int(str(time.time()-int(time.time()))[-2])
     try:
-        rr(9, value_1, 0, value_2)
+        rr(9, value_1, 0, value_2) # line 21
     except RecursionError:
         lcg()
 
