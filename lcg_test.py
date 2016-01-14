@@ -22,22 +22,17 @@ def grab():
                            int(str(time.time()-int(time.time()))[-2])
     return value_1, value_2
 
-def lcg():
-    value_1, value_2 = grab()
-    return_val = False
-    while not return_val:
-        value_1, value_2 = grab()
-        return_val = rr(9, value_1, 0, value_2)
-    return return_val
-
 def rr(modulus, multiplier, increment, seed):
-    relation = False
+    relation = 0
+    value_1, value_2 = grab()
     while not relation:
         relation = 0 < modulus and \
                    0 < multiplier < modulus and \
                    0 <= increment < modulus and \
                    0 <= seed < modulus
-
+    return value_1, value_2
+    generate(9, value_1, 0, value_2)
+        
 def generate(modulus, multiplier, increment, seed):
 
     output = [seed]
