@@ -12,24 +12,20 @@
 
 import time, sys
 
-class RecursionError(Exception):
-    pass
-
 def grab():
     value_1, value_2 = int(str(time.time()-int(time.time()))[-1]), \
                        int(str(time.time()-int(time.time()))[-2])
     return value_1, value_2
 
 def lcg():
-    grab()
+    value_1, value_2 = grab()
     try:
-        return_val == False
-        while return_val == False:
-            rr(9, value_1, 0, value_2) # line 21
-            grab()
+        return_val = False
+        while not return_val:
+            value_1, value_2 = grab()
+            return_val = rr(9, value_1, 0, value_2)
     except Exception:
-        raise RecursionError
-        lgc()
+        lcg()
 
 def rr(modulus, multiplier, increment, seed):
     global output
@@ -64,8 +60,8 @@ def rr(modulus, multiplier, increment, seed):
         output = int(str("".join([str(i) for i in output]))[-2])
     except ValueError:
         lcg()
-    print(output)
-    return output
+    print(return_val)
+    return return_val
 lcg()
 
 sys.exit(0)
