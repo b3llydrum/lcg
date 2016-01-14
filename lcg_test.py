@@ -27,11 +27,10 @@ def lcg():
         while not return_val:
             value_1, value_2 = grab()
             return_val = rr(9, value_1, 0, value_2)
-    except Exception:
+    except Exception as e:
         print("Got recursion exception {}".format(str(e)))
         sys.exit(0)
     return return_val
-    print(return_val)
 
 def rr(modulus, multiplier, increment, seed):
     global output
@@ -68,6 +67,8 @@ def rr(modulus, multiplier, increment, seed):
         lcg()
     print(return_val)
     return return_val
-lcg()
+
+return_val = lcg()
+print(return_val)
 
 sys.exit(0)
