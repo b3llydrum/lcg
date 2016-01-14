@@ -31,18 +31,14 @@ def lcg():
     return return_val
 
 def rr(modulus, multiplier, increment, seed):
-    global output
-    
-    relation = 0 < modulus and \
-               0 < multiplier < modulus and \
-               0 <= increment < modulus and \
-               0 <= seed < modulus
-    if relation == False:
-        if increment == 0 and seed == 0:
-            return_val == rr(9, value_1, 1, seed)
-        else:
-            value_1, value_2 = grab()
-            return_val = rr(9, value_1, 0, value_2)
+    relation = False
+    while not relation:
+        relation = 0 < modulus and \
+                   0 < multiplier < modulus and \
+                   0 <= increment < modulus and \
+                   0 <= seed < modulus
+
+def generate(modulus, multiplier, increment, seed):
 
     output = [seed]
     current_iteration = -1
