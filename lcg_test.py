@@ -24,14 +24,13 @@ def grab():
 
 def rr():
     relation = 0
-    value_1, value_2 = grab()
     while not relation:
         multiplier, seed = grab()
         relation = 0 < modulus and \
                    0 < multiplier < modulus and \
                    0 <= increment < modulus and \
                    0 <= seed < modulus
-    generate(9, multiplier, 0, seed)
+    return generate(9, multiplier, 0, seed)
         
 def generate(modulus, multiplier, increment, seed):
 
@@ -51,14 +50,6 @@ def generate(modulus, multiplier, increment, seed):
                 current_iteration += 1
         output.append(current_iteration)
 
-    try:
-        output = int(str("".join([str(i) for i in output]))[-2])
-    except ValueError:
-        lcg()
-    print(return_val)
-    return return_val
-
-return_val = lcg()
-print(return_val)
+    return int(str("".join([str(i) for i in output]))[-2])
 
 sys.exit(0)
