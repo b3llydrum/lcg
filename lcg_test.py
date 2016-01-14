@@ -37,10 +37,11 @@ def rr(modulus, multiplier, increment, seed):
                0 <= seed < modulus
     if relation == False:
         if increment == 0 and seed == 0:
-            return_val == rr(9, value_1, 0, 1)
+            return_val == rr(9, value_1, 1, seed)
         else:
-            lcg()
-            
+            value_1, value_2 = grab()
+            return_val = rr(9, value_1, 0, value_2)
+
     output = [seed]
     current_iteration = -1
     switch = False
