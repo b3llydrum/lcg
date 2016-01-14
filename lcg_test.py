@@ -22,16 +22,16 @@ def grab():
                            int(str(time.time()-int(time.time()))[-2])
     return value_1, value_2
 
-def rr(modulus, multiplier, increment, seed):
+def rr():
     relation = 0
     value_1, value_2 = grab()
     while not relation:
+        multiplier, seed = grab()
         relation = 0 < modulus and \
                    0 < multiplier < modulus and \
                    0 <= increment < modulus and \
                    0 <= seed < modulus
-    return value_1, value_2
-    generate(9, value_1, 0, value_2)
+    generate(9, multiplier, 0, seed)
         
 def generate(modulus, multiplier, increment, seed):
 
