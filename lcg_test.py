@@ -1,19 +1,13 @@
 # this is a linear congruential generator (lcg)
 # core function of this pseudo-rng is the recurrence relation (rr):
 # Xn+1 = (aXn + c) mod m
-# this version is mod 9, generating one random digit using that relation
+# this lcg only outputs a single integer - hence modulus 9
 # with an increment of 0, making it multiplicative
-# but that can be changed by adjusting the third argument on line 21
 # the multiplier and seed values are the only variables
 # and are pulled from the current time at execution
-# this lcg only pulls one integer, can be changed by adjusting the
-# splice in the output variable on line 50
 # for more visit https://en.wikipedia.org/wiki/Linear_congruential_generator
 
 import time, sys
-
-class Recursion(Exception):
-    pass
 
 def grab():
     value_1 = value_2 = 0
@@ -47,7 +41,7 @@ def generate(modulus, multiplier, increment, seed):
         # 9 is never the last number before cur_it becomes seed again
         # debug for the former
 
-    while current_iteration != seed:
+    while current_iteration != seed: 
 
         if not switch:
             current_iteration = (seed * multiplier) + increment
