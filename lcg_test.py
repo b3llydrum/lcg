@@ -40,6 +40,13 @@ def generate(modulus, multiplier, increment, seed):
     switch = False
     n = 0
 
+    # here lies the bug
+    # either:
+        # 9 is never being passed to the output array
+        # or
+        # 9 is never the last number before cur_it becomes seed again
+        # debug for the former
+
     while current_iteration != seed:
 
         if not switch:
