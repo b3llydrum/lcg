@@ -29,7 +29,8 @@ def rr(modulus, increment):
         relation = 0 < modulus and \
                    0 < multiplier < modulus and \
                    0 <= increment < modulus and \
-                   0 <= seed < modulus
+                   0 <= seed < modulus and \
+                   (multiplier != 3 and multiplier != 6)
     return generate(modulus, multiplier, increment, seed)
         
 def generate(modulus, multiplier, increment, seed):
@@ -37,8 +38,10 @@ def generate(modulus, multiplier, increment, seed):
     output = [seed]
     current_iteration = -1
     switch = False
+    n = 0
 
     while current_iteration != seed:
+
         if not switch:
             current_iteration = (seed * multiplier) + increment
             switch = True
@@ -46,9 +49,14 @@ def generate(modulus, multiplier, increment, seed):
             current_iteration = (current_iteration * multiplier) + increment
         if current_iteration > modulus:
             current_iteration = current_iteration % modulus
-            if current_iteration == 0:
-                current_iteration += 1
+                
+
         output.append(current_iteration)
+        n += 1
+        print("Seed: " + str(seed))
+        print("Multiplier: " + str(multiplier))
+        print("Current iteration: " + str(current_iteration))
+        print("----")
 
     return int(str("".join([str(i) for i in output]))[-2])
 
