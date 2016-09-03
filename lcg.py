@@ -3,6 +3,7 @@
 
 import time, sys
 
+# returns two values pulled from the current time (nanoseconds)
 def grab():
     value_1 = value_2 = 0
     while not value_1 and not value_2:
@@ -20,7 +21,6 @@ def rr(modulus, increment):
     return generate(modulus, multiplier, increment, seed)
 
 def generate(modulus, multiplier, increment, seed):
-
     output = [seed]
     current_iteration = -1
     switch = False
