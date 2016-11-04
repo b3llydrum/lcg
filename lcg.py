@@ -1,7 +1,27 @@
 #! /usr/bin/env python
 
-# multiplier and seed pulled from the current time at execution
 # https://en.wikipedia.org/wiki/Linear_congruential_generator
+# needs randomness testing
+# may weigh to heavily upon certain digits across thousands of tests
+
+"""..........................README..................................
+
+    this program has three main steps:
+
+    grab()
+        - pulls two numbers from the current time in nanoseconds
+            - seed (becomes the random number
+            - multiplier (used in generate())
+
+    validateInputs()
+        - makes sure the numbers are valid according to lcg
+        - refer to wikipedia link to learn more
+
+    generate()
+        - adjusts the seed based on the multiplier, modulus, and increment
+        - returns the 'random' number
+
+.................................................................."""
 
 import time, sys
 
@@ -14,8 +34,21 @@ def grab():
     return value_1, value_2
 
 
-def generate(modulus, multiplier, increment, seed):
+def validateInputs(modulus, increment):
+    """ ensures the relationship of the 'ingredients' fits that of an lcg and returns the 'random' result """
+    relation = 0  # init relation to invalid (0 is False in Python)
+
+    while not relation:  # run until relation is valid
+        multiplier, seed = grab()  # grab new numbers from current time
+        relation = 0 <= increment < modulus and 0 <= seed < modulus and multiplier in [1, 3, 7, 9]  # check validity of relation
+
+    #  return result of generate() using validated 'ingredients'
+    return multiplier, seed
+
+
+def generate(modulus=10, increment=0):
     """ the meat of the machine """
+    multiplier, seed = validateInputs(modulus, increment)
     output = [seed]
     current_iteration = -1  # initialize out of range to cause auto false in while loop below
     switch = False
@@ -33,23 +66,12 @@ def generate(modulus, multiplier, increment, seed):
         output.append(current_iteration)
 
     # cut out second-to-last character and cast it to an int, then return that. Whew!
-    return int(str("".join([str(i) for i in output]))[-2])
-
-
-def main(modulus, increment):
-    """ ensures the relationship of the 'ingredients' fits that of an lcg and returns the 'random' result """
-    relation = 0  # init relation to invalid (0 is False in Python)
-
-    while not relation:  # run until relation is valid
-        multiplier, seed = grab()  # grab new numbers from current time
-        relation = 0 <= increment < modulus and 0 <= seed < modulus and multiplier in [1, 3, 7, 9]  # check validity of relation
-
-    #  return result of generate() using validated 'ingredients'
-    return generate(modulus, multiplier, increment, seed)  # modulus is 10, increment is 0; multiplier and seed are rando
+    result = int(str("".join([str(i) for i in output]))[-2])
+    return result
 
 
 # call main in mod 10 with an iteration of 0 (no more random than it needs to be)
-return_val = main(10, 0)
+return_val = generate(10, 0)
 
 # print and exit
 print(return_val)
