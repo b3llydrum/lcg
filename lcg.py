@@ -6,20 +6,9 @@
 
 """..........................README..................................
 
-    this program has three main steps:
 
-    grab()
-        - pulls two numbers from the current time in nanoseconds
-            - seed (becomes the random number
-            - multiplier (used in generate())
+At execution, this pseudorandom number generator will pick two arbitrary values from a discrete stream of time and use them to create a unique system by which to choose a number between 0 - 9 inclusive
 
-    validateInputs()
-        - makes sure the numbers are valid according to lcg
-        - refer to wikipedia link to learn more
-
-    generate()
-        - adjusts the seed based on the multiplier, modulus, and increment
-        - returns the 'random' number
 
 .................................................................."""
 
