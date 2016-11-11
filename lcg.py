@@ -9,7 +9,8 @@
 
 At execution, this pseudorandom number generator will pick
 two arbitrary values from a discrete stream of time and use them
-to create a unique system by which to choose a number between 0 - 9 inclusive
+to create a unique system by which to choose a number
+between 0 - 9 inclusive
 
 
 .................................................................."""
