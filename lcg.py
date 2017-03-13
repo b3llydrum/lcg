@@ -4,7 +4,7 @@
 # needs randomness testing
 # may weigh to heavily upon certain digits across thousands of tests
 
-"""..........................README..................................
+'''..........................README..................................
 
     this program has three main steps:
 
@@ -21,14 +21,14 @@
         - adjusts the seed based on the multiplier, modulus, and increment
         - returns the 'random' number
 
-.................................................................."""
+..................................................................'''
 
 import time, sys
 
 
 def machine():
     def grab():
-        """ return two values pulled from current time nanoseconds """
+        ''' return two values pulled from current time nanoseconds '''
         value_1 = value_2 = 0  # init both values to zero
         while not value_1 and not value_2:
             try:
@@ -40,7 +40,7 @@ def machine():
 
 
     def validateInputs(modulus, increment):
-        """ ensures the relationship of the 'ingredients' fits that of an lcg and returns the 'random' result """
+        ''' ensures the relationship of the 'ingredients' fits that of an lcg and returns the 'random' result '''
         relation = 0  # init relation to invalid (0 is False in Python)
 
         while not relation:  # run until relation is valid
@@ -52,7 +52,7 @@ def machine():
 
 
     def generate(modulus=10, increment=0):
-        """ the meat of the machine """
+        ''' the meat of the machine '''
         multiplier, seed = validateInputs(modulus, increment)
         output = [seed]
         current_iteration = -1  # initialize out of range to cause auto false in while loop below
@@ -71,7 +71,7 @@ def machine():
             output.append(current_iteration)
 
         # cut out second-to-last character and cast it to an int, then return that. Whew!
-        result = int(str("".join([str(i) for i in output]))[-2])
+        result = int(str(''.join([str(i) for i in output]))[-2])
         return result
 
 
