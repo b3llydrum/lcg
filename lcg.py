@@ -1,31 +1,15 @@
 #! /usr/bin/env python
 
-# https://en.wikipedia.org/wiki/Linear_congruential_generator
-# needs randomness testing
-# may weigh to heavily upon certain digits across thousands of tests
+from time import time
 
-'''..........................README..................................
-
-
-At execution, this pseudorandom number generator will pick
-two arbitrary values from a discrete stream of time and use them
-to create a unique system by which to choose a number
-between 0 - 9 inclusive
-
-
-..................................................................'''
-
-import time, sys
-
-
-def machine():
+def lcg():
     def grab():
         ''' return two values pulled from current time nanoseconds '''
         value_1 = value_2 = 0  # init both values to zero
         while not value_1 and not value_2:
             try:
-                value_1, value_2 = int(str(time.time()-int(time.time()))[-1]), \
-                                int(str(time.time()-int(time.time()))[-2])
+                value_1, value_2 = int(str(time()-int(time()))[-1]), \
+                                int(str(time()-int(time()))[-2])
             except ValueError:
                 grab()
         return value_1, value_2
@@ -72,5 +56,3 @@ def machine():
 
     # print and exit
     return return_val
-
-#sys.exit(0)
