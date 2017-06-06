@@ -3,33 +3,44 @@
 from time import time
 
 def lcg():
-    def grab():
-        ''' return two values pulled from current time nanoseconds '''
-        value_1 = value_2 = 0  # init both values to zero
+
+    # return two values pulled from current time in nanoseconds
+    def get_seeds():
+
+        value_1 = value_2 = 0
+        
         while not value_1 and not value_2:
             try:
                 value_1, value_2 = int(str(time()-int(time()))[-1]), \
                                 int(str(time()-int(time()))[-2])
             except ValueError:
-                grab()
+                get_seeds()
+        
         return value_1, value_2
 
 
-    def validateInputs(modulus, increment):
-        ''' ensures the relationship of the 'ingredients' fits that of an lcg and returns the 'random' result '''
-        relation = 0  # init relation to invalid (0 is False in Python)
+    # ensure relationship of seeds fits that of an lcg and return the "random" result
+    def validate_inputs(modulus, increment):
+        
+        # init relation to zero, or invalid
+        relation = 0
 
-        while not relation:  # run until relation is valid
-            multiplier, seed = grab()  # grab new numbers from current time
-            relation = 0 <= increment < modulus and 0 <= seed < modulus and multiplier in [1, 3, 7, 9]  # check validity of relation
+        while not relation:
 
-        #  return result of generate() using validated 'ingredients'
+            # grab new seeds
+            multiplier, seed = get_seeds()
+
+            # check validity of relation
+            relation = 0 <= increment < modulus and 0 <= seed < modulus and multiplier in [1, 3, 7, 9]
+
+        #  return result of get_seeds() after validation
         return multiplier, seed
 
 
+    # main function
     def generate(modulus=10, increment=0):
-        ''' the meat of the machine '''
-        multiplier, seed = validateInputs(modulus, increment)
+
+        multiplier, seed = validate_inputs(modulus, increment)
         output = [seed]
         current_iteration = -1  # initialize out of range to cause auto false in while loop below
         switch = False
@@ -52,7 +63,4 @@ def lcg():
 
 
     # call main in mod 10 with an iteration of 0 (no more random than it needs to be)
-    return_val = generate(10, 0)
-
-    # print and exit
-    return return_val
+    return generate(10, 0)
